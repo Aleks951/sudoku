@@ -1,24 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { createRef } from 'react';
+import { Alert, Button } from 'react-bootstrap'
+import { useSelector, useDispatch } from 'react-redux'
 import './App.css';
+import { RootState } from './reducer'
+import { increment, decrement, incrementByAmount } from './reducer/notes'
 
 function App() {
+  const notes = useSelector((state: RootState) => state.notes)
+  const dispatch = useDispatch()
+  const myNumber: React.RefObject<HTMLInputElement> = createRef()
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <Alert variant='success'>
+        <h1>{notes.value}</h1>
+      </Alert>
+      <Button
+        variant="success"
+        size="lg"
+        onClick={() => { dispatch(increment()) }}
+      >
+        +
+      </Button>
+      <Button
+        variant="danger"
+        size="lg"
+        onClick={() => { dispatch(decrement()) }}
+      >
+        -
+      </Button>
+      <div>
+        <input
+          ref={myNumber}
+          type={'number'}
+        />
+        <Button
+          variant='primary'
+          onClick={() => {
+            if (typeof (myNumber.current?.value) == 'string') {
+              let myNumberIn: number = Number(myNumber.current?.value)
+              dispatch(incrementByAmount(myNumberIn))
+            }
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          Ok
+        </Button>
+      </div>
     </div>
   );
 }
