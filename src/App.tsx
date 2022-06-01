@@ -4,8 +4,22 @@ import { useSelector, useDispatch } from 'react-redux'
 import './App.css';
 import { RootState } from './reducer'
 import { increment, decrement, incrementByAmount } from './reducer/notes'
+import { createGame } from './logic'
 
 function App() {
+
+  createGame()
+
+
+
+
+
+
+
+
+
+
+
   const notes = useSelector((state: RootState) => state.notes)
   const dispatch = useDispatch()
   const myNumber: React.RefObject<HTMLInputElement> = createRef()
