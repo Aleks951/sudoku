@@ -31,7 +31,7 @@ export default ({ colFor1, colFor2, colFor3 }: data): Array<number> => {
 
     i = 2
 
-    const step3 = clearCopy(origin, answer)
+    const step3 = clearCopy(answer)
 
     for (; i <= 8; i += 3) {
         const { randomNumber, index } = getRandomNumberFromArr(step3)

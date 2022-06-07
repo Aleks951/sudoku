@@ -27,7 +27,7 @@ export default ({ rowFor1, rowFor2, rowFor3 }: data): Array<number> => {
         step2.splice(index, 1)
     }
 
-    const step3 = clearCopy(origin, answer)
+    const step3 = clearCopy(answer)
 
     for (; i <= 8; ++i) {
         const { randomNumber, index } = getRandomNumberFromArr(step3)
