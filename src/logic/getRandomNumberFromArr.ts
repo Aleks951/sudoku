@@ -4,22 +4,25 @@ interface answer {
     index: number
 }
 
-export default (arr: Array<number>): answer => {
+export default (arr: Array<number>): number => {
     if (arr.length === 0) {
         throw Error(`Пустой массив!`)
     }
 
     if (arr.length === 1) {
-        return {
-            randomNumber: arr[0],
-            index: 0
-        }
+        // return {
+        //     randomNumber: arr[0],
+        //     index: 0
+        // }
+        return arr[0]
     }
 
     let randomNumber = Math.round(Math.random() * 10)
     for (; randomNumber >= arr.length; randomNumber -= arr.length) { }
-    return {
-        randomNumber: arr[randomNumber],
-        index: randomNumber
-    }
+    // return {
+    //     randomNumber: arr[randomNumber],
+    //     index: randomNumber
+    // }
+
+    return arr[randomNumber]
 }
