@@ -20,6 +20,14 @@ const getY = (number: number): number => {
     }
 }
 
+const getRows = (arr: Array<number>): Array<Array<number>> => {
+    return [createStaticRow(0, [arr]), createStaticRow(3, [arr]), createStaticRow(6, [arr])]
+}
+
+const getColumns = (arr: Array<number>): Array<Array<number>> => {
+    return [createStaticRow(0, [arr]), createStaticRow(1, [arr]), createStaticRow(2, [arr])]
+}
+
 export default (): Array<Array<number>> => {
     const game: Array<Array<number>> = new Array(9).fill(0).map(() => new Array(9).fill(-1))
 
@@ -29,6 +37,13 @@ export default (): Array<Array<number>> => {
     arrayNumbers.map(number => {
         const x = new Array(9).fill(true)
         const y = new Array(9).fill(true)
+
+        const blockCells: Array<Array<number>> = new Array(9).fill(0).map(() => new Array())
+        for (let i = 0; i < 9; ++i) {
+            game[i].forEach((number, index) => {
+                if (number !== -1) blockCells[i].push(index)
+            })
+        }
 
         for (let i = 0; i < 9; ++i) {
             if (i <= 2) {
@@ -42,10 +57,7 @@ export default (): Array<Array<number>> => {
                 if (y[(i * 3) + 1]) arrY.push(1)
                 if (y[(i * 3) + 2]) arrY.push(2)
 
-                const blockCell: Array<number> = []
-                game[i].forEach((number, index) => {
-                    if (number !== -1) blockCell.push(index)
-                })
+                const blockCell: Array<number> = blockCells[i]
 
                 const numberPositions: Array<number> = []
                 arrX.forEach(xValue => {
@@ -53,6 +65,10 @@ export default (): Array<Array<number>> => {
                         numberPositions.push((xValue * 3) + yValue)
                     })
                 })
+
+                if (number === 6) {
+                    console.log('numberPositions', numberPositions)
+                }
 
                 const numberPosition = getRandomNumberFromArr(clearCopy(numberPositions, blockCell))
                 const numberX = getX(numberPosition)
@@ -72,10 +88,7 @@ export default (): Array<Array<number>> => {
                 if (y[((i - 3) * 3) + 1]) arrY.push(1)
                 if (y[((i - 3) * 3) + 2]) arrY.push(2)
 
-                const blockCell: Array<number> = []
-                game[i].forEach((number, index) => {
-                    if (number !== -1) blockCell.push(index)
-                })
+                const blockCell: Array<number> = blockCells[i]
 
                 const numberPositions: Array<number> = []
                 arrX.forEach(xValue => {
@@ -104,10 +117,7 @@ export default (): Array<Array<number>> => {
                 if (y[((i - 6) * 3) + 1]) arrY.push(1)
                 if (y[((i - 6) * 3) + 2]) arrY.push(2)
 
-                const blockCell: Array<number> = []
-                game[i].forEach((number, index) => {
-                    if (number !== -1) blockCell.push(index)
-                })
+                const blockCell: Array<number> = blockCells[i]
 
                 const numberPositions: Array<number> = []
                 arrX.forEach(xValue => {
@@ -133,81 +143,3 @@ export default (): Array<Array<number>> => {
 
     return game
 }
-
-
-
-
-
-
-
-
-
-
-
-
-// import { getRandomNumberFromArr, clearCopy, createStaticRow, createStaticColumn } from './index'
-
-// export default (): Array<Array<number>> => {
-//     const game: Array<Array<number>> = new Array(9).fill(0).map(() => new Array(9).fill(undefined))
-
-//     const arrayNumbers = new Array(9).fill(0).map((myNothing, i) => ++i)
-//     // const arrayNumbers = [1]
-
-//     arrayNumbers.map(number => {
-//         const x = new Array(9).fill(true)
-//         const y = new Array(9).fill(true)
-
-//         for (let i = 0; i < 9; ++i) {
-//             // if (i >= 0 && i < 3) {
-//             const arrX = []
-//             if (i <= 2) {
-//                 if (x[0]) arrX.push(0)
-//                 if (x[1]) arrX.push(1)
-//                 if (x[2]) arrX.push(2)
-//             } else if (i <= 5) {
-//                 if (x[3]) arrX.push(0)
-//                 if (x[4]) arrX.push(1)
-//                 if (x[5]) arrX.push(2)
-//             } else {
-//                 if (x[6]) arrX.push(0)
-//                 if (x[7]) arrX.push(1)
-//                 if (x[8]) arrX.push(2)
-//             }
-
-//             const arrY = []
-//             if (y[i * 3]) arrY.push(0)
-//             if (y[(i * 3) + 1]) arrY.push(1)
-//             if (y[(i * 3) + 2]) arrY.push(2)
-
-//             const numberX = getRandomNumberFromArr(arrX)
-//             const numberY = getRandomNumberFromArr(arrY)
-
-//             const numberPosition = (numberX * 3) + numberY
-
-//             if (game[i][numberPosition] !== undefined) {
-//                 --i
-//             } else {
-//                 game[i][numberPosition] = number
-
-//                 if (i <= 2) {
-//                     x[numberX] = false
-//                 } else if (i <= 5) {
-//                     if (numberX === 0) x[3] = false
-//                     if (numberX === 1) x[4] = false
-//                     if (numberX === 2) x[5] = false
-//                 } else {
-//                     if (numberX === 0) x[6] = false
-//                     if (numberX === 1) x[7] = false
-//                     if (numberX === 2) x[8] = false
-//                 }
-
-//                 y[(i * 3) + numberY] = false
-//             }
-//             // }
-//         }
-//     })
-
-//     console.log('game', game)
-
-//     return game
-// }

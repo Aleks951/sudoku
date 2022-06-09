@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React, { createRef, StyleHTMLAttributes } from 'react';
 import { Alert, Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import './App.css';
@@ -19,7 +19,11 @@ function App() {
         <div className='box'>
           {box.map(number => (
             <div className='number'>
-              {number}
+              {number === -1
+                ?
+                <textarea className='textE' />
+                :
+                number}
             </div>
           ))}
         </div>
