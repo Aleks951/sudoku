@@ -1,3 +1,5 @@
+@import "~bootstrap/scss/bootstrap";
+
 .wrap {
   display: flex;
   flex-wrap: wrap;
@@ -23,4 +25,11 @@
 
 .textE {
   text-align: center;
+}
+
+.myButton {
+  @extend .btn;
+  background: #181EAD;
+  border-radius: 41px;
+  color: #FFFFFF;
 }

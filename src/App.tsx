@@ -1,32 +1,28 @@
-import React, { createRef, StyleHTMLAttributes } from 'react';
+import React, { createRef, useEffect } from 'react';
 import { Alert, Button } from 'react-bootstrap'
+import Square from './components/sudoku/Square';
+
 import { useSelector, useDispatch } from 'react-redux'
-import './App.css';
+import './App.scss';
 import { RootState } from './reducer'
-import { increment, decrement, incrementByAmount } from './reducer/notes'
-import { createGame } from './logic'
+import { newGame } from './reducer/sudoku'
 
 function App() {
-  const game = createGame()
-
-  const notes = useSelector((state: RootState) => state.notes)
+  const game = useSelector((state: RootState) => state.sudoku.board)
   const dispatch = useDispatch()
-  const myNumber: React.RefObject<HTMLInputElement> = createRef()
+
+  useEffect(() => {
+    dispatch(newGame())
+  }, [])
+
+  // const myNumber: React.RefObject<HTMLInputElement> = createRef()
 
   return (
     <div className='wrap'>
-      {game.map(box => (
-        <div className='box'>
-          {box.map(number => (
-            <div className='number'>
-              {number === -1
-                ?
-                <textarea className='textE' />
-                :
-                number}
-            </div>
-          ))}
-        </div>
+      {game.map(square => (
+        <Square
+          square={square}
+        />
       ))}
     </div>
   )

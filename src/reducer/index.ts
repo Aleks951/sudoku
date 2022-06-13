@@ -1,11 +1,14 @@
 import { combineReducers } from 'redux'
 
-import notes, {CounterState} from './notes'
+import notes, { CounterState } from './notes'
+import sudoku, { gameSudokuState } from './sudoku'
 
 export default combineReducers({
-    notes
+    notes,
+    sudoku
 })
 
 export interface RootState {
-    notes: CounterState
+    notes: CounterState,
+    sudoku: gameSudokuState
 }
