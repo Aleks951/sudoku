@@ -1,4 +1,4 @@
-@import "~bootstrap/scss/bootstrap";
+@import '~antd/dist/antd.css';
 
 .wrap {
   display: flex;
@@ -27,9 +27,106 @@
   text-align: center;
 }
 
-.myButton {
-  @extend .btn;
+.ant-btn-default {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 3vh;
+  line-height: 3vh;
   background: #181EAD;
+  border-color: #181EAD;
   border-radius: 41px;
   color: #FFFFFF;
+  width: 60vh;
+  height: 5vh;
+
+  &:hover,
+  &:focus {
+    color: #181EAD;
+    border-color: #181EAD;
+  }
+}
+
+.cell {
+  box-sizing: border-box;
+
+  width: 7vh;
+  height: 7vh;
+
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #313131;
+  border-radius: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  input {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: xx-large;
+    line-height: 60px;
+    text-align: center;
+  }
+
+  .ant-input-number-handler-wrap {
+    visibility: hidden;
+  }
+}
+
+.ant-input-number {
+
+  &:hover {
+    border-color: #313131;
+  }
+}
+
+.ant-input-number-focused {
+  border-color: #313131;
+  box-shadow: none;
+}
+
+.ant-input-number-status-error {
+  input {
+    color: #FF3838;
+  }
+}
+
+.ant-layout {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.ant-row {
+  height: 100%;
+}
+
+.firstCol {
+  display: flex;
+  justify-content: end;
+}
+
+.secondCol {
+  display: flex;
+  justify-content: center;
+}
+
+.myGridWrap {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 25% 25% 25%;
+  column-gap: 10px;
+  row-gap: 15px;
+  justify-self: center;
+}
+
+.myGridWrap2 {
+  display: grid;
+  grid-template-columns: 30vh 30vh 30vh;
+  grid-template-rows: 25vh 25vh 25vh;
+  column-gap: 10px;
+  row-gap: 15px;
+  justify-self: center;
 }

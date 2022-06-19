@@ -1,11 +1,13 @@
-import React, { createRef, useEffect } from 'react';
-import { Alert, Button } from 'react-bootstrap'
+import React, { useEffect } from 'react';
 import Square from './components/sudoku/Square';
+import { Layout, Button, Row, Col } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux'
 import './App.scss';
 import { RootState } from './reducer'
 import { newGame } from './reducer/sudoku'
+
+const { Footer, Content } = Layout
 
 function App() {
   const game = useSelector((state: RootState) => state.sudoku.board)
@@ -15,67 +17,32 @@ function App() {
     dispatch(newGame())
   }, [])
 
-  // const myNumber: React.RefObject<HTMLInputElement> = createRef()
-
   return (
-    <div className='wrap'>
-      {game.map(square => (
-        <Square
-          square={square}
-        />
-      ))}
-    </div>
+    <Layout>
+      <Content style={{ marginTop: '40px' }}>
+        <Row gutter={[48, 32]}>
+          <Col span={5} />
+          <Col span={14} style={{ display: 'grid' }}>
+            <div className='myGridWrap2'>
+              {
+                game.map((square, i) => (
+                  <div key={i} style={{ display: 'grid' }}>
+                    <Square
+                      square={square}
+                    />
+                  </div>
+                ))
+              }
+            </div>
+          </Col>
+          <Col span={5} />
+        </Row>
+      </Content>
+      <Footer style={{ textAlign: 'center' }}>
+        <Button onClick={() => { dispatch(newGame()) }}>Create new puzzle</Button>
+      </Footer>
+    </Layout>
   )
-
-
-
-
-
-
-
-
-
-
-
-
-  // return (
-  //   <div className="App">
-  //     <Alert variant='success'>
-  //       <h1>{notes.value}</h1>
-  //     </Alert>
-  //     <Button
-  //       variant="success"
-  //       size="lg"
-  //       onClick={() => { dispatch(increment()) }}
-  //     >
-  //       +
-  //     </Button>
-  //     <Button
-  //       variant="danger"
-  //       size="lg"
-  //       onClick={() => { dispatch(decrement()) }}
-  //     >
-  //       -
-  //     </Button>
-  //     <div>
-  //       <input
-  //         ref={myNumber}
-  //         type={'number'}
-  //       />
-  //       <Button
-  //         variant='primary'
-  //         onClick={() => {
-  //           if (typeof (myNumber.current?.value) == 'string') {
-  //             let myNumberIn: number = Number(myNumber.current?.value)
-  //             dispatch(incrementByAmount(myNumberIn))
-  //           }
-  //         }}
-  //       >
-  //         Ok
-  //       </Button>
-  //     </div>
-  //   </div>
-  // );
 }
 
 export default App;

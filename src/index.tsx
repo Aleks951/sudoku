@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'antd/dist/antd.css';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from './reducer';
