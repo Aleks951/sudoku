@@ -9,10 +9,9 @@ interface props {
 export default ({ square }: props) => {
     const disabledCells = shuffle(square).slice(0, 4)
 
-
     return (
-        <div className="myGridWrap">
-            {square.map((number, i) => (
+        <div className="myGridWrap" data-testid='gridWrap'>
+            {square.map(number => (
                 <Cell
                     key={number}
                     number={number}
