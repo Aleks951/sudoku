@@ -10,65 +10,68 @@ const joinArrays = (arr: Array<any>): Array<any> => {
     }, [])
 }
 
-const getRows = (arr: Array<number>, length: number): Array<Array<number>> => {
-    interface answerGetRows {
-        rows: Array<Array<number>>,
-        arr: Array<number>
-    }
-
-    const initialValue: answerGetRows = {
-        rows: [],
-        arr: []
-    }
-    const answer = arr.reduce((acc, item, index) => {
-        if ((index + 1) % length === 0) {
-            const sortedArr = mySort([...acc.arr, item])
-            const rows = [...acc.rows, sortedArr]
-            return {
-                rows,
-                arr: []
-            }
+const getRow = (col: number, arrays: Array<Array<number>>, length: number = 3): Array<number> => {
+    const answer: Array<number> = []
+    arrays.forEach(arr => {
+        let thisCol = col
+        for (let i = 0; i < length; ++i) {
+            answer.push(arr[thisCol])
+            ++thisCol
         }
-
-        const arr = [...acc.arr, item]
-        return {
-            ...acc,
-            arr
-        }
-    }, initialValue)
-
-    return answer.rows
+    })
+    return answer
 }
 
-const getColumns = (arr: Array<number>, length: number): Array<Array<number>> => {
-    const getColumn = (arr: Array<number>, step: number, start: number, length: number): Array<number> => {
-        const answer: Array<number> = []
-        for (let i = 0; i < length; ++i) {
-            const index = start + (i * step)
-            answer.push(arr[index])
-        }
-        return answer
-    }
-
+const getRows = (arr: Array<Array<number>>, length: number): Array<Array<number>> => {
     const answer: Array<Array<number>> = []
 
-    // for (let i = 0; i < length; ++i) {
-    //     answer.push(mySort(getColumn(arr, 9, i, length)))
-    // }
-    answer.push(getColumn(arr, 9, 0, length))
+    for (let i = 0; i < arr.length; i += length) {
+        const squars = arr.slice(i, i + length)
+        for (let index = 0; index < squars.length * length; index += length) {
+            answer.push(getRow(index, squars))
+        }
+    }
+
+    return answer
+}
+
+const getColumn = (row: number, arrays: Array<Array<number>>, step: number = 3, size: number = 2): Array<number> => {
+    const answer: Array<number> = []
+    arrays.forEach(arr => {
+        let thisRow = row
+        for (; thisRow <= row + (step * size); thisRow += step) {
+            answer.push(arr[thisRow])
+        }
+    })
+    return answer
+}
+
+const getColumns = (arr: Array<Array<number>>, length: number): Array<Array<number>> => {
+    const answer: Array<Array<number>> = []
+
+    for (let i = 0; i < length; ++i) {
+        const squars = []
+        for (let index = i; index < length * length; index += length) {
+            squars.push(arr[index])
+        }
+
+        for (let i = 0; i < length; ++i) {
+            answer.push(getColumn(i, squars))
+        }
+    }
 
     return answer
 }
 
 test('Correct game', () => {
     const game = createGame()
-    const allNumbers = joinArrays(game)
 
-    // const squars = game.map(arr => mySort(arr))
-    // const rows = getRows(allNumbers, 9)
-    const columns = getColumns(allNumbers, 9)
+    const rows = getRows(game, 3)
+    const columns = getColumns(game, 3)
 
-    game.forEach((item, i) => console.log(`item ${i}`, item))
-    console.log('allNumbers', allNumbers)
-    console.log('columns', columns)
+    const all = joinArrays([game, rows, columns])
+
+    all.forEach(arr => {
+        expect(mySort(arr)).toEqual(rightAnswer)
+    })
 })
