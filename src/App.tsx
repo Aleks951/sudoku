@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Square from './components/sudoku/Square';
+import Square from './components/Square';
 import { Layout, Button, Row, Col } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux'

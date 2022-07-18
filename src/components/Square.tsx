@@ -1,6 +1,6 @@
 import React from "react"
 import Cell from './Cell'
-import { shuffle } from '../../logic'
+import { shuffle } from '../logic'
 
 interface props {
     square: Array<number>

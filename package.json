@@ -1,5 +1,5 @@
 {
-  "name": "the-chess-my-game",
+  "name": "sudoku",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
