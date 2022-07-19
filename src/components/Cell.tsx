@@ -29,7 +29,11 @@ export default ({ number, disabledCells }: props) => {
                     className="cell"
                     status={statusAnswer ? 'error' : ''}
                     onChange={value => {
-                        setStatusAnswer(value !== number)
+                        if (value === null) {
+                            setStatusAnswer(false)
+                        } else {
+                            setStatusAnswer(value !== number)
+                        }
                     }}
                 />
             }

@@ -33,6 +33,7 @@ export default (fullSize: number = 9): Array<Array<number>> => {
                 if ((axisY & bitY) === 0 && (axisX & bitX) === 0) {
                     sudoku[index][arrShuffle[i]] = number
                     if (createSquare(index + 1, number, axisX ^ bitX, axisY ^ bitY)) {
+                        // Лазейка для сохранений
                         return true
                     } else {
                         sudoku[index][arrShuffle[i]] = -1
