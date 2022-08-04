@@ -6,8 +6,6 @@ interface props {
     disabledCells: Array<number>
 }
 
-
-
 export default ({ number, disabledCells }: props) => {
     const [statusAnswer, setStatusAnswer] = useState(false)
 

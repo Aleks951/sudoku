@@ -1,5 +1,7 @@
 @import '~antd/dist/antd.css';
 
+$input-radio-color: rgba(24, 30, 173, 0.54);
+
 .wrap {
   display: flex;
   flex-wrap: wrap;
@@ -93,11 +95,11 @@
   }
 }
 
-.ant-layout {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-}
+// .ant-layout {
+//   position: absolute;
+//   height: 100%;
+//   width: 100%;
+// }
 
 .ant-row {
   height: 100%;
@@ -115,8 +117,8 @@
 
 .myGridWrap {
   display: grid;
-  grid-template-columns: 33% 33% 33%;
-  grid-template-rows: 25% 25% 25%;
+  // grid-template-columns: 33% 33% 33%;
+  // grid-template-rows: 25% 25% 25%;
   column-gap: 10px;
   row-gap: 15px;
   justify-self: center;
@@ -124,9 +126,25 @@
 
 .myGridWrap2 {
   display: grid;
-  grid-template-columns: 30vh 30vh 30vh;
-  grid-template-rows: 25vh 25vh 25vh;
-  column-gap: 10px;
-  row-gap: 15px;
+  // grid-template-columns: 30vh 30vh 30vh;
+  // grid-template-rows: 25vh 25vh 25vh;
+  column-gap: 25px;
+  row-gap: 25px;
   justify-self: center;
+}
+
+.ant-radio-inner::after {
+  background-color: $input-radio-color;
+}
+
+.ant-radio-checked .ant-radio-inner {
+  border-color: $input-radio-color;
+}
+
+.ant-radio-input:focus+.ant-radio-inner {
+  border-color: $input-radio-color;
+}
+
+.ant-radio-input:focus+.ant-radio-inner {
+  box-shadow: 0 0 0 3px #181ead2e;
 }
