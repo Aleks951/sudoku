@@ -28,7 +28,7 @@ export default (fullSize: number = 9): Array<Array<number>> => {
                 const colNumberPosition = (arrShuffle[i] - (size * rowNumberPosition)) + col
 
                 const bitY = Math.pow(2, rowNumberPosition + size * row)
-                const bitX = Math.pow(2, colNumberPosition + size * col)
+                const bitX = Math.pow(2, colNumberPosition)
 
                 if ((axisY & bitY) === 0 && (axisX & bitX) === 0) {
                     sudoku[index][arrShuffle[i]] = number

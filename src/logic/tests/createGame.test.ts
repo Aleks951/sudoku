@@ -1,7 +1,5 @@
 import createGame from '../createGame'
 
-const rightAnswer = Array.from(Array(9), (param, index) => index + 1)
-
 const mySort = (arr: Array<number>): Array<number> => arr.sort((a, b) => a - b)
 
 const joinArrays = (arr: Array<any>): Array<any> => {
@@ -28,18 +26,18 @@ const getRows = (arr: Array<Array<number>>, length: number): Array<Array<number>
     for (let i = 0; i < arr.length; i += length) {
         const squars = arr.slice(i, i + length)
         for (let index = 0; index < squars.length * length; index += length) {
-            answer.push(getRow(index, squars))
+            answer.push(getRow(index, squars, Math.sqrt(arr.length)))
         }
     }
 
     return answer
 }
 
-const getColumn = (row: number, arrays: Array<Array<number>>, step: number = 3, size: number = 2): Array<number> => {
+const getColumn = (row: number, arrays: Array<Array<number>>, step: number = 3): Array<number> => {
     const answer: Array<number> = []
     arrays.forEach(arr => {
         let thisRow = row
-        for (; thisRow <= row + (step * size); thisRow += step) {
+        for (; thisRow <= row + (step * (step - 1)); thisRow += step) {
             answer.push(arr[thisRow])
         }
     })
@@ -56,7 +54,7 @@ const getColumns = (arr: Array<Array<number>>, length: number): Array<Array<numb
         }
 
         for (let i = 0; i < length; ++i) {
-            answer.push(getColumn(i, squars))
+            answer.push(getColumn(i, squars, Math.sqrt(arr.length)))
         }
     }
 
@@ -64,14 +62,19 @@ const getColumns = (arr: Array<Array<number>>, length: number): Array<Array<numb
 }
 
 test('Correct game', () => {
-    const game = createGame()
+    const sizes = [4, 9, 16]
 
-    const rows = getRows(game, 3)
-    const columns = getColumns(game, 3)
+    sizes.forEach(size => {
+        const game = createGame(size)
+        const rightAnswer = Array.from(Array(size), (param, index) => ++index)
 
-    const all = joinArrays([game, rows, columns])
+        const rows = getRows(game, Math.sqrt(size))
+        const columns = getColumns(game, Math.sqrt(size))
 
-    all.forEach(arr => {
-        expect(mySort(arr)).toEqual(rightAnswer)
+        const all = joinArrays([game, rows, columns])
+
+        all.forEach(arr => {
+            expect(mySort(arr)).toEqual(rightAnswer)
+        })
     })
 })
