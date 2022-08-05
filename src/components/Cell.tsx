@@ -1,5 +1,7 @@
 import React, { useState } from "react"
-import { InputNumber } from 'antd';
+import { InputNumber } from 'antd'
+import { RootState } from '../reducer'
+import { useSelector } from 'react-redux'
 
 interface props {
     number: number,
@@ -8,6 +10,7 @@ interface props {
 
 export default ({ number, disabledCells }: props) => {
     const [statusAnswer, setStatusAnswer] = useState(false)
+    const { hints, sizeBoard } = useSelector((state: RootState) => state.sudoku)
 
     return (
         <>
@@ -23,9 +26,9 @@ export default ({ number, disabledCells }: props) => {
                 <InputNumber
                     data-testid='active'
                     min={1}
-                    max={9}
+                    max={sizeBoard}
                     className="cell"
-                    status={statusAnswer ? 'error' : ''}
+                    status={statusAnswer && hints ? 'error' : ''}
                     onChange={value => {
                         if (value === null) {
                             setStatusAnswer(false)

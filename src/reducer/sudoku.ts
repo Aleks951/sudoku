@@ -4,13 +4,15 @@ import { createGame } from '../logic'
 export interface gameSudokuState {
     board: Array<Array<number>>,
     difficultyLevel: number,
-    sizeBoard: number
+    sizeBoard: 4 | 9 | 16,
+    hints: boolean
 }
 
 const initialState = {
     board: [],
     difficultyLevel: 0,
-    sizeBoard: 9
+    sizeBoard: 9,
+    hints: false
 } as gameSudokuState
 
 const sudokuSlice = createSlice({

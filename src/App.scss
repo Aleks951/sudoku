@@ -2,6 +2,11 @@
 
 $input-radio-color: rgba(24, 30, 173, 0.54);
 
+.ant-layout-header,
+.ant-layout {
+  background: none;
+}
+
 .wrap {
   display: flex;
   flex-wrap: wrap;
@@ -147,4 +152,19 @@ $input-radio-color: rgba(24, 30, 173, 0.54);
 
 .ant-radio-input:focus+.ant-radio-inner {
   box-shadow: 0 0 0 3px #181ead2e;
+}
+
+.wrapper-for-menu-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5em 0;
+
+  h1 {
+    margin: 0;
+  }
+
+  span {
+    color: $input-radio-color;
+  }
 }

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Modal, Radio, Space, Typography } from 'antd';
+import { Button, Modal, Radio, Space, Switch } from 'antd';
 import type { RadioChangeEvent } from 'antd';
+import { setState } from '../reducer/sudoku'
+import { RootState } from '../reducer'
+import { useSelector, useDispatch } from 'react-redux'
+import MenuItem from './MenuItem'
 
 interface props {
     visibleModal: boolean,
@@ -12,6 +16,8 @@ interface props {
 const sizes = [2, 3, 4]
 
 export default ({ visibleModal, setVisibleModal, createGame, closable }: props) => {
+    const dispatch = useDispatch()
+
     const [level, setLevel] = useState(0)
     const onChangeLevel = (e: RadioChangeEvent) => {
         setLevel(e.target.value)
@@ -20,6 +26,11 @@ export default ({ visibleModal, setVisibleModal, createGame, closable }: props) 
     const [size, setSize] = useState(9)
     const onChangeSize = (e: RadioChangeEvent) => {
         setSize(e.target.value)
+    }
+
+    const { hints } = useSelector((state: RootState) => state.sudoku)
+    const onChangePod = (hints: boolean) => {
+        dispatch(setState({ hints }))
     }
 
     const create = () => {
@@ -47,23 +58,29 @@ export default ({ visibleModal, setVisibleModal, createGame, closable }: props) 
                         }}
                         onClick={create}
                     >
-                        Create
+                        Create new game
                     </Button>
                 </div>
             ]}
         >
-            <Typography.Title>Level</Typography.Title>
+            <MenuItem
+                title='Level'
+                description='The choice of difficulty affects the number of open cells on the field'
+            />
             <Radio.Group
                 onChange={onChangeLevel}
                 value={level}
             >
                 <Space direction="vertical">
-                    <Radio value={0}>Easy, 3-5 prefilled numbers</Radio>
-                    <Radio value={1}>Medium, 3-4 prefilled numbers</Radio>
-                    <Radio value={2}>Hard — 1-3 prefilled numbers</Radio>
+                    <Radio value={0}>Easy</Radio>
+                    <Radio value={1}>Medium</Radio>
+                    <Radio value={2}>Hard</Radio>
                 </Space>
             </Radio.Group>
-            <Typography.Title>Size</Typography.Title>
+            <MenuItem
+                title='Size'
+                description='Playing field size'
+            />
             <Radio.Group
                 onChange={onChangeSize}
                 value={size}
@@ -72,6 +89,14 @@ export default ({ visibleModal, setVisibleModal, createGame, closable }: props) 
                     {sizes.map(size => <Radio key={size} value={size * size}>{`${size} * ${size}`}</Radio>)}
                 </Space>
             </Radio.Group>
+            <MenuItem
+                title='Hints'
+                description='This switch can be activated at any time during the game. If it is enabled, then you will see hints (the borders of incorrectly filled cells will turn red)'
+            />
+            <Switch
+                checked={hints}
+                onChange={onChangePod}
+            />
         </Modal>
     )
 }

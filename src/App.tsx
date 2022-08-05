@@ -1,17 +1,17 @@
 import React, { useState, useMemo } from 'react';
 import Square from './components/Square';
 import GameSelection from './components/GameSelection';
-import { Layout, Button, Row, Col, Spin } from 'antd';
+import { Layout, Button } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux'
 import './App.scss';
 import { RootState } from './reducer'
 import { newGame, setState } from './reducer/sudoku'
 
-const { Footer, Content } = Layout
+const { Header, Content } = Layout
 
 function App() {
-  const { board, difficultyLevel, sizeBoard } = useSelector((state: RootState) => state.sudoku)
+  const { board, sizeBoard } = useSelector((state: RootState) => state.sudoku)
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
   const [visibleModal, setVisibleModal] = useState(true)
@@ -41,10 +41,13 @@ function App() {
         createGame={createGame}
         closable={board.length !== 0}
       />
-      <Content style={{ marginTop: '40px' }}>
+      <Header style={{ textAlign: 'center', marginTop: '40px' }}>
+        <Button onClick={() => setVisibleModal(true)}>Menu</Button>
+      </Header>
+      <Content style={{ margin: '20px 0' }}>
         {loading
           ?
-          <Spin />
+          null
           :
           <div
             style={{
@@ -58,8 +61,6 @@ function App() {
                   <div key={i}>
                     <Square
                       square={square}
-                      difficultyLevel={difficultyLevel}
-                      sizeBoard={sizeBoard}
                       gridTemplate={gridTemplate}
                     />
                   </div>
@@ -69,9 +70,6 @@ function App() {
           </div>
         }
       </Content>
-      <Footer style={{ textAlign: 'center' }}>
-        <Button onClick={() => setVisibleModal(true)}>Create new puzzle</Button>
-      </Footer>
     </Layout>
   )
 }
