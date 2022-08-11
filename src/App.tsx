@@ -41,29 +41,23 @@ function App() {
         createGame={createGame}
         closable={board.length !== 0}
       />
-      <Header style={{ textAlign: 'center', marginTop: '40px' }}>
+      <Header className='header'>
         <Button onClick={() => setVisibleModal(true)}>Menu</Button>
       </Header>
-      <Content style={{ margin: '20px 0' }}>
+      <Content className='content'>
         {loading
           ?
           null
           :
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center'
-            }}
-          >
+          <div className='center-f'>
             <div className='myGridWrap2' style={{ gridTemplateColumns: gridTemplate, gridTemplateRows: gridTemplate }}>
               {
                 board.map((square, i) => (
-                  <div key={i}>
-                    <Square
-                      square={square}
-                      gridTemplate={gridTemplate}
-                    />
-                  </div>
+                  <Square
+                    key={i}
+                    square={square}
+                    gridTemplate={gridTemplate}
+                  />
                 ))
               }
             </div>

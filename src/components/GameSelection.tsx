@@ -48,14 +48,9 @@ export default ({ visibleModal, setVisibleModal, createGame, closable }: props) 
             closable={closable}
             onCancel={closeModal}
             footer={[
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'center'
-                }}>
+                <div className='center-f'>
                     <Button
-                        style={{
-                            width: '30vh'
-                        }}
+                        className='button-create-game'
                         onClick={create}
                     >
                         Create new game

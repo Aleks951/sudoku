@@ -7,6 +7,15 @@ $input-radio-color: rgba(24, 30, 173, 0.54);
   background: none;
 }
 
+.header {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.content {
+  margin: 20px 0;
+}
+
 .wrap {
   display: flex;
   flex-wrap: wrap;
@@ -120,6 +129,11 @@ $input-radio-color: rgba(24, 30, 173, 0.54);
   justify-content: center;
 }
 
+.center-f {
+  display: flex;
+  justify-content: center;
+}
+
 .myGridWrap {
   display: grid;
   // grid-template-columns: 33% 33% 33%;
@@ -167,4 +181,8 @@ $input-radio-color: rgba(24, 30, 173, 0.54);
   span {
     color: $input-radio-color;
   }
+}
+
+.button-create-game {
+  width: 30vh;
 }
