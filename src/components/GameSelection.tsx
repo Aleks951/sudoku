@@ -13,7 +13,7 @@ interface props {
     closable: boolean
 }
 
-const sizes = [2, 3, 4]
+const sizes = [4, 9, 16]
 
 export default ({ visibleModal, setVisibleModal, createGame, closable }: props) => {
     const dispatch = useDispatch()
@@ -86,7 +86,7 @@ export default ({ visibleModal, setVisibleModal, createGame, closable }: props) 
                 value={size}
             >
                 <Space direction="vertical">
-                    {sizes.map(size => <Radio key={size} value={size * size}>{`${size} * ${size}`}</Radio>)}
+                    {sizes.map(size => <Radio key={size} value={size}>{`${size} * ${size}`}</Radio>)}
                 </Space>
             </Radio.Group>
             <MenuItem
