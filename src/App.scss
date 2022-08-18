@@ -85,10 +85,15 @@ $input-radio-color: rgba(24, 30, 173, 0.54);
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 500;
-    font-size: xx-large;
+    font-size: 5vh;
     line-height: 60px;
     text-align: center;
   }
+
+  // .ant-input-number-input {
+  //   width: auto;
+  //   height: auto;
+  // }
 
   .ant-input-number-handler-wrap {
     visibility: hidden;
@@ -142,8 +147,8 @@ $input-radio-color: rgba(24, 30, 173, 0.54);
   display: grid;
   // grid-template-columns: 33% 33% 33%;
   // grid-template-rows: 25% 25% 25%;
-  column-gap: 10px;
-  row-gap: 15px;
+  column-gap: 1vh;
+  row-gap: 1vh;
   justify-self: center;
 }
 
@@ -151,8 +156,8 @@ $input-radio-color: rgba(24, 30, 173, 0.54);
   display: grid;
   // grid-template-columns: 30vh 30vh 30vh;
   // grid-template-rows: 25vh 25vh 25vh;
-  column-gap: 25px;
-  row-gap: 25px;
+  column-gap: 2vh;
+  row-gap: 3vh;
   justify-self: center;
 }
 
