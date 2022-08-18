@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import Square from './components/Square';
 import GameSelection from './components/GameSelection';
+import WrapSpin from './components/WrapSpin'
 import { Layout, Button } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -22,15 +23,12 @@ function App() {
   }, [sizeBoard])
 
   const createGame = (difficultyLevel: number, sizeBoard: number) => {
-    const promise = new Promise(res => {
+    new Promise(res => {
       setLoading(true)
+      dispatch(setState({ difficultyLevel, sizeBoard }))
+      dispatch(newGame(sizeBoard))
       res(true)
-    })
-
-    promise
-      .then(() => dispatch(setState({ difficultyLevel, sizeBoard })))
-      .then(() => dispatch(newGame(sizeBoard)))
-      .then(() => setLoading(false))
+    }).then(() => setLoading(false))
   }
 
   return (
@@ -41,29 +39,24 @@ function App() {
         createGame={createGame}
         closable={board.length !== 0}
       />
-      <Header className='header'>
-        <Button onClick={() => setVisibleModal(true)}>Menu</Button>
-      </Header>
-      <Content className='content'>
-        {loading
-          ?
-          null
-          :
+      <WrapSpin loading={loading}>
+        <Header className='header'>
+          <Button onClick={() => setVisibleModal(true)}>Menu</Button>
+        </Header>
+        <Content className='content'>
           <div className='center-f'>
             <div className='myGridWrap2' style={{ gridTemplateColumns: gridTemplate, gridTemplateRows: gridTemplate }}>
-              {
-                board.map((square, i) => (
-                  <Square
-                    key={i}
-                    square={square}
-                    gridTemplate={gridTemplate}
-                  />
-                ))
-              }
+              {board.map((square, i) => (
+                <Square
+                  key={i}
+                  square={square}
+                  gridTemplate={gridTemplate}
+                />
+              ))}
             </div>
           </div>
-        }
-      </Content>
+        </Content>
+      </WrapSpin>
     </Layout>
   )
 }

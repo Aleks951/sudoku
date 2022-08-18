@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { InputNumber } from 'antd'
 import { RootState } from '../reducer'
 import { useSelector } from 'react-redux'
@@ -8,9 +8,17 @@ interface props {
     disabledCells: Array<number>
 }
 
+type typeInputValue = undefined | number
+
 export default ({ number, disabledCells }: props) => {
     const [statusAnswer, setStatusAnswer] = useState(false)
+    const [inputValue, setInputValue] = useState<typeInputValue>()
     const { hints, sizeBoard } = useSelector((state: RootState) => state.sudoku)
+
+    useEffect(() => {
+        setInputValue(undefined)
+        setStatusAnswer(false)
+    }, [disabledCells])
 
     return (
         <>
@@ -25,6 +33,7 @@ export default ({ number, disabledCells }: props) => {
                 :
                 <InputNumber
                     data-testid='active'
+                    value={inputValue}
                     min={1}
                     max={sizeBoard}
                     className="cell"
@@ -35,6 +44,7 @@ export default ({ number, disabledCells }: props) => {
                         } else {
                             setStatusAnswer(value !== number)
                         }
+                        setInputValue(value)
                     }}
                 />
             }

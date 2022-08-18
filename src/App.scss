@@ -2,6 +2,10 @@
 
 $input-radio-color: rgba(24, 30, 173, 0.54);
 
+.ant-spin-dot-item {
+  background-color: $input-radio-color;
+}
+
 .ant-layout-header,
 .ant-layout {
   background: none;
