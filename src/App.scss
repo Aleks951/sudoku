@@ -1,4 +1,5 @@
 @import '~antd/dist/antd.css';
+@import './mobile.scss';
 
 $input-radio-color: rgba(24, 30, 173, 0.54);
 
@@ -57,7 +58,6 @@ $input-radio-color: rgba(24, 30, 173, 0.54);
   border-color: #181EAD;
   border-radius: 41px;
   color: #FFFFFF;
-  width: 60vh;
   height: 5vh;
 
   &:hover,
@@ -89,10 +89,11 @@ $input-radio-color: rgba(24, 30, 173, 0.54);
     line-height: 60px;
     text-align: center;
   }
-  // .ant-input-number-input {
-  //   width: auto;
-  //   height: auto;
-  // }
+
+  .ant-input-number-input {
+    padding: 0;
+    height: 100%;
+  }
 
   .ant-input-number-handler-wrap {
     visibility: hidden;
@@ -117,11 +118,9 @@ $input-radio-color: rgba(24, 30, 173, 0.54);
   }
 }
 
-// .ant-layout {
-//   position: absolute;
-//   height: 100%;
-//   width: 100%;
-// }
+.ant-layout {
+ min-width: 1000px;
+}
 
 .ant-row {
   height: 100%;

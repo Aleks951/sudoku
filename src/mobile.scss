@@ -1,0 +1,11 @@
+@media (max-width: 425px) {
+    .ant-btn-default {
+        min-width: 27vh;
+    }
+}
+
+@media (min-width: 426px) {
+    .ant-btn-default {
+        min-width: 50vh;
+    }
+}
